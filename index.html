@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Battles | Reveal</title>
+    <!-- Tailwind CSS for layout and utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Background Transitions */
+        .bg-layer {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('Website background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: all 1s ease-in-out;
+            filter: brightness(0.5);
+            z-index: 0;
+        }
+
+        .revealed .bg-layer {
+            transform: scale(1.05);
+            filter: blur(10px) brightness(0.2);
+        }
+
+        /* Electric Button Animation */
+        @keyframes electric-glow {
+            0% { box-shadow: 0 0 15px #eab308, inset 0 0 10px #facc15; filter: brightness(1); }
+            50% { box-shadow: 0 0 50px #facc15, inset 0 0 30px #eab308; filter: brightness(1.4); }
+            52% { box-shadow: 0 0 10px #eab308, inset 0 0 5px #facc15; filter: brightness(0.7); }
+            54% { box-shadow: 0 0 55px #facc15, inset 0 0 35px #eab308; filter: brightness(1.6); }
+            100% { box-shadow: 0 0 15px #eab308, inset 0 0 10px #facc15; filter: brightness(1); }
+        }
+
+        .electric-btn {
+            animation: electric-glow 3s infinite;
+            position: relative;
+        }
+
+        .electric-btn::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 9999px;
+            border: 2px solid transparent;
+            border-top-color: #fbbf24;
+            border-bottom-color: #fbbf24;
+            animation: rotate 0.8s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Fade and Reveal Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .show-reveal.hidden-content {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-pulse-fast {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #eab308;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center">
+
+    <div id="bgLayer" class="bg-layer">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
+    </div>
+
+    <div class="absolute top-6 left-6 z-50 flex items-center gap-3">
+        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border border-yellow-500/50 bg-black/60 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(234,179,8,0.2)] overflow-hidden">
+            <img src="Official BB logo.png" alt="BB Logo" class="w-full h-full object-cover">
+        </div>
+    </div>
+
+    <main class="relative z-10 w-full px-4 flex flex-col items-center justify-center h-screen overflow-hidden">
+        
+        <!-- START SCREEN -->
+        <div id="startScreen" class="text-center fade-in flex flex-col items-center">
+            <h1 class="text-6xl md:text-9xl font-black text-yellow-500 mb-8 tracking-tighter uppercase italic drop-shadow-[0_0_20px_rgba(234,179,8,0.4)]">
+                Binary <span class="text-white">Battles</span>
+            </h1>
+            
+            <button onclick="handleReveal()" class="electric-btn w-40 h-40 md:w-56 md:h-56 rounded-full bg-yellow-500 flex flex-col items-center justify-center group transition-transform active:scale-95 shadow-[0_0_70px_rgba(234,179,8,0.6)] mb-20">
+                <i data-lucide="zap" class="text-black mb-2 w-10 h-10 md:w-12 md:h-12 fill-black"></i>
+                <span class="text-black font-black text-xl md:text-3xl tracking-[0.1em] drop-shadow-md">REVEAL</span>
+                <div class="absolute inset-0 rounded-full border-4 border-yellow-300/40 animate-ping"></div>
+            </button>
+
+            <!-- Direct Drive Link Button -->
+            <a id="driveBtn" href="#" target="_blank" class="px-10 py-4 border-2 border-yellow-500/50 rounded-full bg-black/40 backdrop-blur-md text-yellow-500 font-bold text-xs md:text-sm tracking-[0.3em] uppercase hover:bg-yellow-500 hover:text-black hover:scale-105 transition-all duration-300 flex items-center gap-3">
+                <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+                Click to Upload
+            </a>
+        </div>
+
+        <!-- REVEAL SCREEN -->
+        <div id="revealScreen" class="hidden-content w-full flex-col items-center">
+            
+            <div class="mb-6 relative">
+                <div class="absolute inset-0 bg-yellow-500 blur-md opacity-20 animate-pulse"></div>
+                <div class="relative px-8 py-2 border-y-2 border-yellow-500 bg-black/40 backdrop-blur-xl shadow-[0_0_25px_rgba(234,179,8,0.2)]">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-yellow-500"></div>
+                    <div class="absolute top-0 right-0 w-1 h-full bg-yellow-500"></div>
+                    <h2 class="text-yellow-500 text-sm md:text-lg tracking-[0.6em] font-black uppercase text-center flex items-center gap-4">
+                        <span class="h-[2px] w-4 md:w-8 bg-yellow-500/50"></span>
+                        Today's Face-Off
+                        <span class="h-[2px] w-4 md:w-8 bg-yellow-500/50"></span>
+                    </h2>
+                </div>
+            </div>
+
+            <div class="w-full max-w-4xl flex flex-col items-center">
+                
+                <div class="relative flex flex-row justify-center items-center gap-4 md:gap-20 w-full mb-4">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+                        <div class="bg-black border-2 border-yellow-500 rounded-full w-12 h-12 md:w-20 md:h-20 flex items-center justify-center shadow-[0_0_40px_rgba(234,179,8,0.8)] ring-4 md:ring-8 ring-black">
+                            <span class="text-yellow-500 font-black text-sm md:text-2xl italic leading-none block transform translate-y-[1px]">V/S</span>
+                        </div>
+                    </div>
+                    <div class="w-1/2 flex justify-end">
+                        <div class="relative w-full max-w-[130px] md:max-w-[260px] aspect-square rounded-full border-2 md:border-4 border-yellow-500 overflow-hidden shadow-[0_0_50px_rgba(234,179,8,0.3)] bg-zinc-900 group">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop" alt="Alex Chen" class="w-full h-full object-cover grayscale-[30%] transition-all duration-700 hover:grayscale-0 hover:scale-110">
+                        </div>
+                    </div>
+                    <div class="w-1/2 flex justify-start">
+                        <div class="relative w-full max-w-[130px] md:max-w-[260px] aspect-square rounded-full border-2 md:border-4 border-yellow-500 overflow-hidden shadow-[0_0_50px_rgba(234,179,8,0.3)] bg-zinc-900 group">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop" alt="Priya Sharma" class="w-full h-full object-cover grayscale-[30%] transition-all duration-700 hover:grayscale-0 hover:scale-110">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-center items-start gap-4 md:gap-20 w-full mb-6">
+                    <div class="w-1/2 text-center uppercase">
+                        <h3 class="text-sm md:text-3xl font-black text-white leading-tight tracking-tight drop-shadow-lg">Alex Chen</h3>
+                    </div>
+                    <div class="w-1/2 text-center uppercase">
+                        <h3 class="text-sm md:text-3xl font-black text-white leading-tight tracking-tight drop-shadow-lg">Priya Sharma</h3>
+                    </div>
+                </div>
+
+                <!-- Audio Player -->
+                <div class="w-full max-w-md bg-white/5 border border-yellow-500/20 backdrop-blur-md rounded-2xl p-3 md:p-5 mb-6 flex flex-col gap-2 shadow-xl">
+                    <div class="flex items-center gap-4">
+                        <button id="playBtn" onclick="toggleAudio()" class="w-10 h-10 md:w-12 md:h-12 bg-yellow-500 rounded-full flex items-center justify-center hover:scale-105 transition-transform flex-shrink-0">
+                            <i id="playIcon" data-lucide="play" class="text-black fill-black w-5 h-5 md:w-6 md:h-6"></i>
+                        </button>
+                        <div class="flex-grow">
+                            <p class="text-[9px] text-yellow-500 uppercase font-black tracking-widest mb-1">Official Battle Track</p>
+                            <div class="flex items-center justify-between text-[9px] md:text-xs text-gray-400 font-bold mb-1">
+                                <span id="currentTime">0:00</span>
+                                <span id="durationTime">0:00</span>
+                            </div>
+                            <div class="relative w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                                <div id="progressBar" class="absolute top-0 left-0 h-full bg-yellow-500 w-0 transition-all duration-100"></div>
+                                <input type="range" id="seekSlider" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" value="0" step="0.1">
+                            </div>
+                        </div>
+                        <button onclick="downloadBattleTrack()" title="Download Track" class="w-10 h-10 md:w-12 md:h-12 border border-yellow-500/30 rounded-full flex items-center justify-center text-yellow-500 hover:bg-yellow-500 hover:text-black transition-all">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <audio id="battleAudio"></audio>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 py-3 px-10 border border-yellow-500/30 text-gray-400 bg-black/40 backdrop-blur-md rounded-full shadow-[0_0_20px_rgba(234,179,8,0.1)]">
+                <i data-lucide="clock" class="text-yellow-500 animate-pulse-fast w-4 h-4 md:w-5 md:h-5"></i>
+                <span class="text-[10px] md:text-sm tracking-[0.3em] uppercase font-black">
+                    DEADLINE: <span class="text-white ml-2">OCT 31, 2024 - 11:59 PM</span>
+                </span>
+            </div>
+        </div>
+    </main>
+    !--Hello--!
+    <div class="absolute bottom-4 w-full text-center text-[8px] md:text-[10px] text-gray-700 tracking-[0.6em] uppercase font-bold z-10">
+        Binary Boppers Society
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        // 1. Paste your Google Drive Folder Link here:
+        const DRIVE_LINK = "https://drive.google.com/drive/folders/1zOV9Zxu6Zw31Z-f_-K_TKGL_FGzrff-Q?usp=drive_link";
+        
+        // 2. Change the track URL here:
+        const BATTLE_TRACK_URL = "Edit 8.mp3";
+
+        lucide.createIcons();
+
+        // Initialize links
+        document.getElementById('driveBtn').href = DRIVE_LINK;
+
+        const audio = document.getElementById('battleAudio');
+        audio.src = BATTLE_TRACK_URL;
+
+        const playBtn = document.getElementById('playBtn');
+        const progressBar = document.getElementById('progressBar');
+        const seekSlider = document.getElementById('seekSlider');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationTimeEl = document.getElementById('durationTime');
+
+        function handleReveal() {
+            const startScreen = document.getElementById('startScreen');
+            const revealScreen = document.getElementById('revealScreen');
+            document.body.classList.add('revealed');
+            startScreen.style.display = 'none';
+            revealScreen.classList.add('show-reveal');
+            lucide.createIcons();
+        }
+
+        async function downloadBattleTrack() {
+            try {
+                const response = await fetch(BATTLE_TRACK_URL);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'BinaryBattles_Track.mp3';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            } catch (error) {
+                window.open(BATTLE_TRACK_URL, '_blank');
+            }
+        }
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = '<i data-lucide="pause" class="text-black fill-black w-5 h-5 md:w-6 md:h-6"></i>';
+            } else {
+                audio.pause();
+                playBtn.innerHTML = '<i data-lucide="play" class="text-black fill-black w-5 h-5 md:w-6 md:h-6"></i>';
+            }
+            lucide.createIcons();
+        }
+
+        audio.addEventListener('timeupdate', () => {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            if(progressBar) progressBar.style.width = percent + '%';
+            if(seekSlider) seekSlider.value = percent;
+            if(currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(durationTimeEl) durationTimeEl.textContent = formatTime(audio.duration);
+        });
+
+        if(seekSlider) {
+            seekSlider.addEventListener('input', () => {
+                const time = (seekSlider.value / 100) * audio.duration;
+                audio.currentTime = time;
+            });
+        }
+
+        function formatTime(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+    </script>
+</body>
+</html>
