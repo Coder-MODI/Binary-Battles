@@ -124,7 +124,7 @@
 
     <div class="absolute top-6 left-6 z-50 flex items-center gap-3">
         <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border border-yellow-500/50 bg-black/60 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(234,179,8,0.2)] overflow-hidden">
-            <img src="Official BB logo.png" alt="BB Logo" class="w-full h-full object-cover">
+            <img src="Official BB logo.jpg" alt="BB Logo" class="w-full h-full object-cover">
         </div>
     </div>
 
@@ -142,12 +142,12 @@
                 <div class="absolute inset-0 rounded-full border-4 border-yellow-300/40 animate-ping"></div>
             </button>
 
+            <!-- Corrected Upload Button -->
             <div id="uploadContainer" class="flex flex-col items-center gap-4 transition-all">
-                <input type="file" id="fileInput" accept="video/*" class="hidden" onchange="handleFileSelect(event)">
-                <button onclick="document.getElementById('fileInput').click()" class="px-10 py-4 border-2 border-yellow-500/50 rounded-full bg-black/40 backdrop-blur-md text-yellow-500 font-bold text-xs md:text-sm tracking-[0.3em] uppercase hover:bg-yellow-500 hover:text-black hover:scale-105 transition-all duration-300 flex items-center gap-3">
+                <a id="driveLinkBtn" href="#" target="_blank" class="px-10 py-4 border-2 border-yellow-500/50 rounded-full bg-black/40 backdrop-blur-md text-yellow-500 font-bold text-xs md:text-sm tracking-[0.3em] uppercase hover:bg-yellow-500 hover:text-black hover:scale-105 transition-all duration-300 flex items-center gap-3">
                     <i data-lucide="upload-cloud" class="w-5 h-5"></i>
                     Click to Upload Video
-                </button>
+                </a>
             </div>
         </div>
 
@@ -169,10 +169,8 @@
 
             <div class="w-full max-w-5xl flex flex-col items-center">
                 
-                <!-- Containers brought closer together with tighter gap -->
                 <div class="relative flex flex-row justify-center items-start gap-1 md:gap-4 w-full mb-6">
                     
-                    <!-- V/S Badge - Centered relative to the container -->
                     <div class="absolute top-[65px] md:top-[130px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
                         <div class="bg-black border-2 border-yellow-500 rounded-full w-12 h-12 md:w-20 md:h-20 flex items-center justify-center shadow-[0_0_40px_rgba(234,179,8,0.8)] ring-4 md:ring-8 ring-black">
                             <span class="text-yellow-500 font-black text-sm md:text-2xl italic leading-none block transform translate-y-[1px]">V/S</span>
@@ -241,10 +239,14 @@
 
     <script>
         // --- CONFIGURATION ---
+        // REPLACE THIS URL WITH YOUR ACTUAL GOOGLE DRIVE FOLDER LINK
         const DRIVE_LINK = "https://drive.google.com/drive/folders/YOUR_FOLDER_HERE";
         const BATTLE_TRACK_URL = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
 
         lucide.createIcons();
+
+        // Ensure the button points to the drive link
+        document.getElementById('driveLinkBtn').href = DRIVE_LINK;
 
         const audio = document.getElementById('battleAudio');
         audio.src = BATTLE_TRACK_URL;
@@ -315,10 +317,6 @@
             const min = Math.floor(seconds / 60);
             const sec = Math.floor(seconds % 60);
             return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-        }
-
-        function handleFileSelect(event) {
-            window.open(DRIVE_LINK, '_blank');
         }
     </script>
 </body>
