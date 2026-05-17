@@ -28,8 +28,6 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            /* Using your uploaded background file */
-            background-image: url('Website background.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -258,13 +256,20 @@
 
     <script>
         // --- CONFIGURATION ---
-        // REPLACE THIS URL WITH YOUR ACTUAL GOOGLE DRIVE FOLDER LINK
-        const DRIVE_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSfL9L15ISfI9njKVqBrvrekpgl4nCz0WgspHKYDB3m2cXl6jA/viewform?usp=sharing&ouid=108157015112609672060";
-        // Change the track URL here
+        // 1. Set your home page background picture file name or URL here:
+        const BACKGROUND_IMAGE_URL = "new background.png";
+
+        // 2. REPLACE THIS URL WITH YOUR ACTUAL GOOGLE DRIVE FOLDER LINK:
+        const DRIVE_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSfL9L15ISfI9njKVqBrvrekpgl4nCz0WgspHKYDB3m2cXl6jA/viewform";
+
+        // 3. Change the audio track URL here:
         const BATTLE_TRACK_URL = "Anushka vs Niharika audio.mp3";
 
         // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Dynamically apply background image on load
+        document.getElementById('bgLayer').style.backgroundImage = `url('${BACKGROUND_IMAGE_URL}')`;
 
         // Ensure the upload button points directly to the drive link
         document.getElementById('driveLinkBtn').href = DRIVE_LINK;
