@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: black;
@@ -27,7 +28,8 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            background-image: url('new background.png');
+            /* Using your uploaded background file */
+            background-image: url('Website background.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -37,8 +39,8 @@
         }
 
         .revealed .bg-layer {
-            transform: scale(1.05);
-            filter: blur(10px) brightness(0.2);
+            transform: scale(1.1);
+            filter: blur(8px) brightness(0.2);
         }
 
         /* Electric Button Animation */
@@ -89,12 +91,14 @@
             transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
 
+        /* Show content when class is added */
         .show-reveal.hidden-content {
             display: flex;
             opacity: 1;
             transform: translateY(0);
         }
 
+        /* Custom pulse for the deadline icon */
         .animate-pulse-fast {
             animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
@@ -104,6 +108,7 @@
             50% { opacity: .5; }
         }
 
+        /* Seek bar progress customization */
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -121,17 +126,18 @@
         <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
     </div>
 
+    <!-- BB Logo (Top Left) -->
     <div class="absolute top-6 left-6 z-50 flex items-center gap-3">
         <div class="w-12 h-12 md:w-16 md:h-16 rounded-full border border-yellow-500/50 bg-black/60 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(234,179,8,0.2)] overflow-hidden">
             <img src="Official BB logo.png" alt="BB Logo" class="w-full h-full object-cover">
         </div>
     </div>
-    
-    <!-- KIIT Logo (Top Right) - Moved here to be on the same level as BB Logo -->
+
+    <!-- KIIT Logo (Top Right) -->
     <div id="kiitHeaderLogo" class="absolute top-6 right-6 z-50">
         <img src="kiit-cse_logo.webp" alt="KIIT SCE Logo" class="w-[180px] md:w-[280px] object-contain">
     </div>
-!--Learning Git--!
+
     <main class="relative z-10 w-full px-4 flex flex-col items-center justify-center h-screen overflow-hidden">
         
         <!-- START SCREEN -->
@@ -140,13 +146,14 @@
                 Binary <span class="text-white">Battles</span>
             </h1>
             
+            <!-- Electric Reveal Button -->
             <button onclick="handleReveal()" class="electric-btn w-40 h-40 md:w-56 md:h-56 rounded-full bg-yellow-500 flex flex-col items-center justify-center group transition-transform active:scale-95 shadow-[0_0_70px_rgba(234,179,8,0.6)] mb-16">
                 <i data-lucide="zap" class="text-black mb-2 w-10 h-10 md:w-12 md:h-12 fill-black"></i>
                 <span class="text-black font-black text-xl md:text-3xl tracking-[0.1em] drop-shadow-md">REVEAL</span>
                 <div class="absolute inset-0 rounded-full border-4 border-yellow-300/40 animate-ping"></div>
             </button>
 
-            <!-- Corrected Upload Button -->
+            <!-- Upload Button directly pointing to Google Drive -->
             <div id="uploadContainer" class="flex flex-col items-center gap-4 transition-all">
                 <a id="driveLinkBtn" href="#" target="_blank" class="px-10 py-4 border-2 border-yellow-500/50 rounded-full bg-black/40 backdrop-blur-md text-yellow-500 font-bold text-xs md:text-sm tracking-[0.3em] uppercase hover:bg-yellow-500 hover:text-black hover:scale-105 transition-all duration-300 flex items-center gap-3">
                     <i data-lucide="upload-cloud" class="w-5 h-5"></i>
@@ -173,33 +180,41 @@
 
             <div class="w-full max-w-5xl flex flex-col items-center">
                 
-                <div class="relative flex flex-row justify-center items-start gap-1 md:gap-4 w-full mb-6">
+                <!-- Photos brought closer together with a tighter gap, names directly underneath -->
+                <div class="relative flex flex-row justify-center items-start gap-1 md:gap-4 w-full max-w-4xl mb-6">
                     
-                    <div class="absolute top-[65px] md:top-[130px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
-                        <div class="bg-black border-2 border-yellow-500 rounded-full w-12 h-12 md:w-20 md:h-20 flex items-center justify-center shadow-[0_0_40px_rgba(234,179,8,0.8)] ring-4 md:ring-8 ring-black">
-                            <span class="text-yellow-500 font-black text-sm md:text-2xl italic leading-none block transform translate-y-[1px]">V/S</span>
+                    <!-- V/S Badge - Geometrically centered relative to the top line of circles -->
+                    <div class="absolute top-[75px] md:top-[150px] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+                        <div class="bg-black border-2 border-yellow-500 rounded-full w-12 h-12 md:w-20 md:h-20 flex items-center justify-center shadow-[0_0_30px_rgba(234,179,8,0.7)] ring-4 md:ring-8 ring-black">
+                            <span class="text-yellow-500 font-black text-sm md:text-2xl italic tracking-tighter">V/S</span>
                         </div>
                     </div>
 
                     <!-- Dancer 1 Container -->
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[140px] h-[140px] md:w-[260px] md:h-[260px] rounded-full border-2 md:border-4 border-yellow-500 overflow-hidden shadow-[0_0_50px_rgba(234,179,8,0.3)] bg-zinc-900 group">
-                            <img src="Niharika Ratnakar.jpeg" alt="Alex Chen" class="w-full h-full object-cover grayscale-[30%] transition-all duration-700 hover:grayscale-0 hover:scale-110">
+                        <div class="relative w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full border-2 md:border-4 border-yellow-500 overflow-hidden shadow-[0_0_50px_rgba(234,179,8,0.3)] bg-zinc-900 group">
+                            <img src="Niharika Ratnakar.jpeg" alt="Niharika Ratnakar" class="w-full h-full object-cover grayscale-[30%] transition-all duration-700 hover:grayscale-0 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-yellow-500/20 to-transparent opacity-0 hover:opacity-100 transition-opacity"></div>
                         </div>
-                        <h3 class="mt-4 text-xs md:text-3xl font-black text-white text-center leading-tight tracking-tight uppercase drop-shadow-lg max-w-[140px] md:max-w-[260px]">Niharika Ratnakar</h3>
+                        <h3 class="mt-4 text-xs md:text-3xl font-black text-white text-center leading-tight tracking-tight drop-shadow-lg max-w-[150px] md:max-w-[300px] uppercase">
+                            Niharika Ratnakar
+                        </h3>
                     </div>
 
                     <!-- Dancer 2 Container -->
                     <div class="flex flex-col items-center">
-                        <div class="relative w-[140px] h-[140px] md:w-[260px] md:h-[260px] rounded-full border-2 md:border-4 border-yellow-500 overflow-hidden shadow-[0_0_50px_rgba(234,179,8,0.3)] bg-zinc-900 group">
+                        <div class="relative w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full border-2 md:border-4 border-yellow-500 overflow-hidden shadow-[0_0_50px_rgba(234,179,8,0.3)] bg-zinc-900 group">
                             <img src="shikhar.webp" alt="Shikhar Modi" class="w-full h-full object-cover grayscale-[30%] transition-all duration-700 hover:grayscale-0 hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-yellow-500/20 to-transparent opacity-0 hover:opacity-100 transition-opacity"></div>
                         </div>
-                        <h3 class="mt-4 text-xs md:text-3xl font-black text-white text-center leading-tight tracking-tight uppercase drop-shadow-lg max-w-[140px] md:max-w-[260px]">Shikhar Modi</h3>
+                        <h3 class="mt-4 text-xs md:text-3xl font-black text-white text-center leading-tight tracking-tight drop-shadow-lg max-w-[150px] md:max-w-[300px] uppercase">
+                            Shikhar Modi
+                        </h3>
                     </div>
 
                 </div>
 
-                <!-- Audio Player -->
+                <!-- Sleek Audio Player -->
                 <div class="w-full max-w-md bg-white/5 border border-yellow-500/20 backdrop-blur-md rounded-2xl p-3 md:p-5 mb-6 flex flex-col gap-2 shadow-xl">
                     <div class="flex items-center gap-4">
                         <button id="playBtn" onclick="toggleAudio()" class="w-10 h-10 md:w-12 md:h-12 bg-yellow-500 rounded-full flex items-center justify-center hover:scale-105 transition-transform flex-shrink-0">
@@ -216,12 +231,14 @@
                                 <input type="range" id="seekSlider" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" value="0" step="0.1">
                             </div>
                         </div>
+                        <!-- Forced Blob Download Button -->
                         <button onclick="downloadBattleTrack()" title="Download Track" class="w-10 h-10 md:w-12 md:h-12 border border-yellow-500/30 rounded-full flex items-center justify-center text-yellow-500 hover:bg-yellow-500 hover:text-black transition-all">
                             <i data-lucide="download" class="w-5 h-5"></i>
                         </button>
                     </div>
                     <audio id="battleAudio"></audio>
                 </div>
+
             </div>
 
             <!-- Deadline Bar -->
@@ -234,24 +251,25 @@
         </div>
     </main>
 
-    <!-- Footer Branding -->
-    <div class="absolute bottom-4 left-0 w-full text-center flex justify-center items-center z-10">
-        <p class="text-[8px] md:text-[10px] text-gray-700 tracking-[0.6em] uppercase font-bold text-center">
-            Binary Boppers Society
-        </p>
+    <!-- Footer Branding (Targeted with ID for toggle) -->
+    <div id="footerBranding" class="absolute bottom-6 w-full text-center text-[8px] md:text-[10px] text-gray-700 tracking-[0.6em] uppercase font-bold z-10">
+        Binary Boppers Society
     </div>
 
     <script>
         // --- CONFIGURATION ---
         // REPLACE THIS URL WITH YOUR ACTUAL GOOGLE DRIVE FOLDER LINK
-        const DRIVE_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSfL9L15ISfI9njKVqBrvrekpgl4nCz0WgspHKYDB3m2cXl6jA/viewform?usp=dialog";
+        const DRIVE_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSfL9L15ISfI9njKVqBrvrekpgl4nCz0WgspHKYDB3m2cXl6jA/viewform?usp=sharing&ouid=108157015112609672060";
+        // Change the track URL here
         const BATTLE_TRACK_URL = "Anushka vs Niharika audio.mp3";
 
+        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Ensure the button points to the drive link
+        // Ensure the upload button points directly to the drive link
         document.getElementById('driveLinkBtn').href = DRIVE_LINK;
 
+        // Setup Audio Element
         const audio = document.getElementById('battleAudio');
         audio.src = BATTLE_TRACK_URL;
 
@@ -264,12 +282,25 @@
         function handleReveal() {
             const startScreen = document.getElementById('startScreen');
             const revealScreen = document.getElementById('revealScreen');
+            const kiitLogo = document.getElementById('kiitHeaderLogo');
+            const footerBranding = document.getElementById('footerBranding');
+
+            // 1. Add background effect to body
             document.body.classList.add('revealed');
+
+            // 2. Hide start screen, KIIT Logo, and Footer branding
             startScreen.style.display = 'none';
+            if (kiitLogo) kiitLogo.style.display = 'none';
+            if (footerBranding) footerBranding.style.display = 'none';
+
+            // 3. Show reveal screen
             revealScreen.classList.add('show-reveal');
+            
+            // Re-initialize icons
             lucide.createIcons();
         }
 
+        // Forced Blob Download Mechanism
         async function downloadBattleTrack() {
             try {
                 const response = await fetch(BATTLE_TRACK_URL);
@@ -284,10 +315,12 @@
                 window.URL.revokeObjectURL(url);
                 document.body.removeChild(a);
             } catch (error) {
+                // CORS fallback
                 window.open(BATTLE_TRACK_URL, '_blank');
             }
         }
 
+        // Play and Pause Toggle
         function toggleAudio() {
             if (audio.paused) {
                 audio.play();
@@ -299,18 +332,19 @@
             lucide.createIcons();
         }
 
+        // Timeline progress logic
         audio.addEventListener('timeupdate', () => {
             const percent = (audio.currentTime / audio.duration) * 100;
-            if(progressBar) progressBar.style.width = percent + '%';
-            if(seekSlider) seekSlider.value = percent;
-            if(currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
+            if (progressBar) progressBar.style.width = percent + '%';
+            if (seekSlider) seekSlider.value = percent;
+            if (currentTimeEl) currentTimeEl.textContent = formatTime(audio.currentTime);
         });
 
         audio.addEventListener('loadedmetadata', () => {
-            if(durationTimeEl) durationTimeEl.textContent = formatTime(audio.duration);
+            if (durationTimeEl) durationTimeEl.textContent = formatTime(audio.duration);
         });
 
-        if(seekSlider) {
+        if (seekSlider) {
             seekSlider.addEventListener('input', () => {
                 const time = (seekSlider.value / 100) * audio.duration;
                 audio.currentTime = time;
